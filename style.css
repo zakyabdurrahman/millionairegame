@@ -87,7 +87,7 @@ html, body {
     font-family: Algerian;
 }
 .display {
-    height: 255px;
+    height: 200px;
     width: 200px;
     background-color: rgb(17, 17, 138);
     margin: 14px;
@@ -200,7 +200,7 @@ img:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
+    display: none;
 }
 .audience-wrapper, .right-wrapper, .chat-wrapper, .wrong-wrapper, .right-wrapper, .warning{
     background-color: rgb(2, 2, 250);
@@ -274,4 +274,28 @@ img:hover {
 
 .aud .audOpt{
     display: inline;
+}
+
+.jawaban-box {
+    display: inline-block;
+    background-color: rgb(9, 10, 63);
+    color: white;
+    margin: 0px 16px;
+    height: 48px;
+    width: 150px;
+}
+
+.jawaban {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center  ;
+}
+
+.jawaban-box p {
+    text-align: center;
+}
+
+.main h2 {
+    text-align: center;
+    color: white;
 }

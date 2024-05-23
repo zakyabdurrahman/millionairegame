@@ -4,8 +4,12 @@ let object = {
 }
 
 let hadiah = [7000_000, 15_500_000, 31_250_000, 62_500_000, 125_000_000, 250_000_000, 500_000_000, 1_000_000_000]
+let currentPrizeIndex = 0;
+let currentSoal = 0;
 
-
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 function randomSoal() {
     let bankSoal = [
@@ -28,7 +32,7 @@ function randomSoal() {
         {
             id: 3,
             pertanyaan: 'Laap adalah makanan khas negara ?',
-            jawaban: ['laos', 'Thailand', 'Kamboja', 'Filipina'],
+            jawaban: ['Laos', 'Thailand', 'Kamboja', 'Filipina'],
             kunciJawaban: 'Laos',
             hadiah: 0
         },
@@ -183,6 +187,35 @@ function getRandomInt(min, max) {
   const maxFloored = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
 }
+let soal = randomSoal();
+function updateGame(soalArr) {
+    let prize = document.querySelector(`#i${currentPrizeIndex}`);
+    prize.classList.add('current');
+    let pertanyaan = document.querySelector('#pertanyaan');
+    console.log(`soal`, soalArr);
+    pertanyaan.innerText = soalArr[currentSoal].pertanyaan;
+    //bersihin eventListener
+    let scoreEl = document.querySelector('.score');
+    let prizeMoney = numberWithCommas(hadiah[currentPrizeIndex]);
+    scoreEl.innerText = `Hadiah: Rp ${prizeMoney}`;
+    //seed jawaban
+    // loop 0 - 4;
+    for (let i = 0; i < 4; i++) {
+        let pertanyaanBox = document.querySelector(`#jawaban${i}`);
+        pertanyaanBox.innerText = soalArr[currentSoal].jawaban[i];
+    }
+    //select prize
+
+
+}
+
+function correctAnswer(soal) {
+    currentPrizeIndex++;
+    currentSoal++;
+    updateGame(soal);
+    let music =  document.querySelector('#correctMusic')
+    music.play();
+}
 
 //game start
 // render first question
@@ -199,10 +232,32 @@ let startButton = document.querySelector('.start-btn')
 let welcomePage = document.querySelector('.welcome');
 let gamePage = document.getElementById('game');
 
+
+
+
 startButton.addEventListener("click", function(event) {
     welcomePage.style.display = "none";
     gamePage.style.display = "block";
 })
 
 
-console.log(randomSoal());
+//set up click on jawaban
+for (let i = 0; i < 4; i++) {
+  let pertanyaanBox = document.querySelector(`#jawaban${i}`).parentElement;
+  pertanyaanBox.addEventListener('click', function(event) {
+    //cek jawaban benar -> lanjut;
+    let jawaban = event.target.innerText;
+    let {kunciJawaban} = soal[currentSoal];
+    if (jawaban === kunciJawaban) {
+        console.log("BENAR");
+        correctAnswer(soal);
+    }
+  })
+}
+
+
+updateGame(soal);
+
+
+
+

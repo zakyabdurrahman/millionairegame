@@ -10,6 +10,9 @@
     <title>Who Wants To Be A Millionaire</title>
   </head>
   <body>
+    <audio id="correctMusic" >
+      <source src="correct.mp3" type="audio/mpeg">
+    </audio>
     <div class="welcome">
       <div class="welcome-content">
         <div class="name">
@@ -42,31 +45,27 @@
               <p>Hadiah:</p>
               <span class="score">Rp.0</span>
             </div>
+            
+            <h2 id="pertanyaan">Pertanyaan</h2>
             <div class="display">
-              <button>Rp.1.000.000.000</button>
-              <button>Rp.500.000.000</button>
-              <button>Rp.250.000.000</button>
-              <button>Rp.125.000.000</button>
-              <button>Rp.62.5000.000</button>
-              <button>Rp.31.250.000</button>
-              <button>Rp.15.500.000</button>
-              <button class="current">Rp.7.000.000</button>
-              <p class="pertanyaan">AAA</p>
+              <button id="i7">Rp.1.000.000.000</button>
+              <button id="i6">Rp.500.000.000</button>
+              <button id="i5">Rp.250.000.000</button>
+              <button id="i4">Rp.125.000.000</button>
+              <button id="i3">Rp.62.5000.000</button>
+              <button id="i2">Rp.31.250.000</button>
+              <button id="i1">Rp.15.500.000</button>
+              <button class="current" id="i0">Rp.7.000.000</button>
+              
             </div>
-            <div class="jawaban">
-              <div id="jawaban0"></div>
-              <div id="jawaban1"></div>
-              <div id="jawaban2"></div>
-              <div></div>
+            <div class="jawaban" >
+              <div class="jawaban-box"><p id="jawaban0">A</p></div>
+              <div  class="jawaban-box"><p id="jawaban1">B</p></div>
+              <div class="jawaban-box"><p id="jawaban2">C</p> </div>
+              <div  class="jawaban-box"><p id="jawaban3">D</p></div>
+              
             </div>
           </div>
-          <div class="aside">
-            <div class="life-line">
-              <img class="fifty" src="images/fifty.png">
-              <img class="call" src="images/call.png">
-              <img class="aud" src="images/aud.png">
-            </div>
-           
             <div class="stages">
               
             </div>
