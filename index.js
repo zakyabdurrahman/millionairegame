@@ -3,6 +3,10 @@ let object = {
     hadiah: 0
 }
 
+let hadiah = [7000_000, 15_500_000, 31_250_000, 62_500_000, 125_000_000, 250_000_000, 500_000_000, 1_000_000_000]
+
+
+
 function randomSoal() {
     let bankSoal = [
         {
@@ -146,17 +150,59 @@ function randomSoal() {
     }
     */
    //loop 8 kali
-   //tiap loop angka random 0-16 unik (cek apakah soal duplikat)
+   for (let i = 0; i < 8; i++) {
+     //tiap loop angka random 0-16 unik (cek apakah soal duplikat)
+     let random = getRandomInt(0, 16);
+     let pertanyaan = bankSoal[random];
+     while(soalSudahAda(pertanyaan.id, result)) {
+        random = getRandomInt(0, 15);
+        pertanyaan = bankSoal[random];
+     }
+     pertanyaan.hadiah = hadiah[i];
+     result.push(pertanyaan);
+   }
+   
    //kalo soal yang sama ada bikin angka random 
-    return soal
+    return result
 }
 
-function getRandomInt(min, max) {
+
+//function buat cek apakah ada soal yang sama 
+function soalSudahAda(id, arr) {
+    let ada = false;
+    let hasil = arr.find((element) => element.id === id);
+    if (hasil !== undefined) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getRandomInt(min, max) {   
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
 }
 
-functi
+//game start
+// render first question
+// render(questionObj) 
+// remove listener to choice buttons
+// add listener to choice buttons
+// gameover()
+// correct()
+// wrong()
+// render info on creect answer
 
-console.log(getRandomInt(1, 16));
+
+let startButton = document.querySelector('.start-btn')
+let welcomePage = document.querySelector('.welcome');
+let gamePage = document.getElementById('game');
+
+startButton.addEventListener("click", function(event) {
+    welcomePage.style.display = "none";
+    gamePage.style.display = "block";
+})
+
+
+console.log(randomSoal());
