@@ -191,6 +191,10 @@ let soal = randomSoal();
 function updateGame(soalArr) {
     let prize = document.querySelector(`#i${currentPrizeIndex}`);
     prize.classList.add('current');
+    if (currentPrizeIndex > 0) {
+        let prevPrize = document.querySelector(`#i${currentPrizeIndex - 1}`)
+        prevPrize.classList.remove("current");
+    }
     let pertanyaan = document.querySelector('#pertanyaan');
     console.log(`soal`, soalArr);
     pertanyaan.innerText = soalArr[currentSoal].pertanyaan;
