@@ -299,3 +299,92 @@ img:hover {
     text-align: center;
     color: white;
 }
+
+.result-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 500px;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 6px;
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+.result-box h2 {
+    font-size: 52px;
+    color: white;
+}
+.result-box .persen-container {
+    width: 300px;
+    /* background: seagreen; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0px 40px;
+}
+.persen-container .progres {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    background: conic-gradient(white 3.6deg, rgba(255,255,255, .1) 0deg);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.persen-container .progres::before {
+content: "";
+position: absolute;
+width: 210px;
+height: 210px;
+background: navy;
+border-radius: 50%;
+}
+.progres .progres-value {
+    position: relative;
+font-size: 45px;
+font-weight: 600;
+color: whitesmoke;
+}
+.persen-container .prize-text{
+font-size: 26px;
+font-weight: 600;
+margin-top: 20px;
+color: white;
+}
+.result-box .buttons-result {
+    display: flex;
+}
+
+.buttons-result button{
+    width: 130px;
+    height: 47px;
+    background: whitesmoke;
+    border-radius: 2px solid whitesmoke;
+    outline: none;
+    border-radius: 6px;
+    font-size: 16px;
+    color: navy;
+    font-weight: 600;
+    margin: 0 20px 20px;
+    cursor: pointer;
+    transition: 1.5s;
+}
+.buttons-result button:nth-child(1):hover{
+    background: rgba(196, 195, 195, 0.316);
+    color: whitesmoke;
+}
+
+
+.buttons-result button:nth-child(2){
+    background: transparent;
+    color: whitesmoke;
+}
+.buttons-result button:nth-child(2):hover{
+    background: whitesmoke;
+    color: navy;
+}

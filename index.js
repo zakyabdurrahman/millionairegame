@@ -1,11 +1,17 @@
-let object = {
+let player = {
     nama: '',
-    hadiah: 0
+    hadiah: 0,
+    rights: 0
 }
 
 let hadiah = [7000_000, 15_500_000, 31_250_000, 62_500_000, 125_000_000, 250_000_000, 500_000_000, 1_000_000_000]
 let currentPrizeIndex = 0;
 let currentSoal = 0;
+
+let startButton = document.querySelector(".start-btn");
+let welcomePage = document.querySelector(".welcome");
+let gamePage = document.getElementById("game");
+let gameOverPage = document.querySelector(".result-box");
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -189,6 +195,7 @@ function getRandomInt(min, max) {
 }
 let soal = randomSoal();
 function updateGame(soalArr) {
+    
     let prize = document.querySelector(`#i${currentPrizeIndex}`);
     prize.classList.add('current');
     if (currentPrizeIndex > 0) {
@@ -196,7 +203,7 @@ function updateGame(soalArr) {
         prevPrize.classList.remove("current");
     }
     let pertanyaan = document.querySelector('#pertanyaan');
-    console.log(`soal`, soalArr);
+    
     pertanyaan.innerText = soalArr[currentSoal].pertanyaan;
     //bersihin eventListener
     let scoreEl = document.querySelector('.score');
@@ -214,13 +221,62 @@ function updateGame(soalArr) {
 }
 
 function correctAnswer(soal) {
+    player.hadiah = hadiah[currentPrizeIndex];
     currentPrizeIndex++;
     currentSoal++;
+    player.rights++;
+    
+    if (currentPrizeIndex === 7) {
+        gameOver();
+    }
     updateGame(soal);
     let music =  document.querySelector('#correctMusic')
     music.play();
 }
 
+function wrongAnswer() {
+    let music = document.querySelector("#wrongMusic");
+    music.play();
+    for (let i = 0; i < 8; i++) {
+      let prize = document.querySelector(`#i${currentPrizeIndex}`);
+      prize.classList.remove("current");
+    }
+    gameOver();
+}
+
+function gameOver(){
+    let prizeText = document.querySelector('.prize-text');
+    gamePage.style.display = "none";
+    gameOverPage.style.display = "flex";
+    let prizeMoney = numberWithCommas(player.hadiah); 
+    prizeText.innerText = `Your Prize Rp.${prizeMoney}`;
+    
+    let persen = player.rights / 8; 
+    let derajat = 360 * persen;
+    persen = Math.floor(persen * 100);
+
+
+    console.log(persen);
+    let progress = document.querySelector(".progres");
+    let progresText = document.querySelector('.progres-value');
+    progresText.innerText = `${persen}%`
+    progress.style.background = `conic-gradient(white ${derajat}deg, rgba(255,255,255, .1) 0deg)`;
+    //let progresText = document.querySelector();
+}
+
+
+let tryButton = document.querySelector('.TryAgain');
+tryButton.addEventListener('click', function(event) {
+    gameOverPage.style.display = 'none';
+    welcomePage.style.display = 'block';
+    currentPrizeIndex = 0;
+    currentSoal = 0;
+    soal = randomSoal();
+    player.hadiah = 0;
+    player.rights = 0;
+    
+    updateGame(soal);
+})
 //game start
 // render first question
 // render(questionObj) 
@@ -232,9 +288,7 @@ function correctAnswer(soal) {
 // render info on creect answer
 
 
-let startButton = document.querySelector('.start-btn')
-let welcomePage = document.querySelector('.welcome');
-let gamePage = document.getElementById('game');
+
 
 
 
@@ -253,8 +307,10 @@ for (let i = 0; i < 4; i++) {
     let jawaban = event.target.innerText;
     let {kunciJawaban} = soal[currentSoal];
     if (jawaban === kunciJawaban) {
-        console.log("BENAR");
+        
         correctAnswer(soal);
+    } else {
+        wrongAnswer(soal);
     }
   })
 }
