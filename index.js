@@ -135,7 +135,7 @@ let bankSoal = [
 ]
     let result =[]
     let soal = Math.floor(Math.random() * 16) + 1
-    // console.log(soal)
+    console.log(soal)
     for (let i = 0; i < bankSoal.length; i++) {
         if(soal = 1){
             console.log(bankSoal[i][0]);
@@ -144,5 +144,5 @@ let bankSoal = [
         }
     }
     result.push(["bankSoal"][i])
-return result
+return soal
 }
