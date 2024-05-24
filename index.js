@@ -14,7 +14,7 @@ let gamePage = document.getElementById("game");
 let gameOverPage = document.querySelector(".result-box");
 
 function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 function randomSoal() {
@@ -237,8 +237,8 @@ function randomSoal() {
         {
             id: 28,
             pertanyaan: 'Daerah di mana gravitasi menjadi sangat kuat sehingga bahkan cahaya tidak dapat melarikan diri dari efek gravitasi tersebut disebut ?',
-            jawaban: ['Gravitasi Area', 'Ruang Hampa', 'Ruang Waktu', 'Singularitas '],
-            kunciJawaban: 'Singularitas ',
+            jawaban: ['Gravitasi Area', 'Ruang Hampa', 'Ruang Waktu', 'Singularitas'],
+            kunciJawaban: 'Singularitas',
             hadiah: 0
         },
 
@@ -274,7 +274,7 @@ function randomSoal() {
             hadiah: 0
         }
     ]
-    let result =[]
+    let result = []
     /*let soal = Math.floor(Math.random() * 16) + 1
     console.log(soal)
     for (let i = 0; i < bankSoal.length; i++) {
@@ -286,20 +286,20 @@ function randomSoal() {
         }
     }
     */
-   //loop 8 kali
-   for (let i = 0; i < 8; i++) {
-     //tiap loop angka random 0-16 unik (cek apakah soal duplikat)
-     let random = getRandomInt(0, 32);
-     let pertanyaan = bankSoal[random];
-     while(soalSudahAda(pertanyaan.id, result)) {
-        random = getRandomInt(0, 32);
-        pertanyaan = bankSoal[random];
-     }
-     pertanyaan.hadiah = hadiah[i];
-     result.push(pertanyaan);
-   }
-   
-   //kalo soal yang sama ada bikin angka random 
+    //loop 8 kali
+    for (let i = 0; i < 8; i++) {
+        //tiap loop angka random 0-16 unik (cek apakah soal duplikat)
+        let random = getRandomInt(0, 32);
+        let pertanyaan = bankSoal[random];
+        while (soalSudahAda(pertanyaan.id, result)) {
+            random = getRandomInt(0, 32);
+            pertanyaan = bankSoal[random];
+        }
+        pertanyaan.hadiah = hadiah[i];
+        result.push(pertanyaan);
+    }
+
+    //kalo soal yang sama ada bikin angka random 
     return result
 }
 
@@ -315,14 +315,14 @@ function soalSudahAda(id, arr) {
     }
 }
 
-function getRandomInt(min, max) {   
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+function getRandomInt(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
 }
 let soal = randomSoal();
 function updateGame(soalArr) {
-    
+
     let prize = document.querySelector(`#i${currentPrizeIndex}`);
     prize.classList.add('current');
     if (currentPrizeIndex > 0) {
@@ -330,7 +330,7 @@ function updateGame(soalArr) {
         prevPrize.classList.remove("current");
     }
     let pertanyaan = document.querySelector('#pertanyaan');
-    
+
     pertanyaan.innerText = soalArr[currentSoal].pertanyaan;
     //bersihin eventListener
     let scoreEl = document.querySelector('.score');
@@ -364,7 +364,7 @@ function correctAnswer(soal) {
         return;
     }
     updateGame(soal);
-    let music =  document.querySelector('#correctMusic')
+    let music = document.querySelector('#correctMusic')
     music.play();
 }
 
@@ -372,27 +372,27 @@ function wrongAnswer() {
     let music = document.querySelector("#wrongMusic");
     music.play();
     for (let i = 0; i < 8; i++) {
-      let prize = document.querySelector(`#i${currentPrizeIndex}`);
-      prize.classList.remove("current");
+        let prize = document.querySelector(`#i${currentPrizeIndex}`);
+        prize.classList.remove("current");
     }
     let jawaban = soal[currentSoal].kunciJawaban;
     alert(`SALAH!! Jawabannya adalah: ${jawaban}`)
     gameOver();
 }
 
-function gameOver(){
+function gameOver() {
     for (let i = 0; i < 8; i++) {
         let prize = document.querySelector(`#i${i}`);
         prize.classList.remove("current");
-      }
+    }
 
     let prizeText = document.querySelector('.prize-text');
     gamePage.style.display = "none";
     gameOverPage.style.display = "flex";
-    let prizeMoney = numberWithCommas(player.hadiah); 
+    let prizeMoney = numberWithCommas(player.hadiah);
     prizeText.innerText = `Your Prize Rp.${prizeMoney}`;
-    
-    let persen = player.rights / 8; 
+
+    let persen = player.rights / 8;
     let derajat = 360 * persen;
     persen = Math.floor(persen * 100);
 
@@ -406,7 +406,7 @@ function gameOver(){
 
 
 let tryButton = document.querySelector('.TryAgain');
-tryButton.addEventListener('click', function(event) {
+tryButton.addEventListener('click', function (event) {
     gameOverPage.style.display = 'none';
     welcomePage.style.display = 'block';
     currentPrizeIndex = 0;
@@ -414,7 +414,7 @@ tryButton.addEventListener('click', function(event) {
     soal = randomSoal();
     player.hadiah = 0;
     player.rights = 0;
-    
+
     updateGame(soal);
 })
 //game start
@@ -433,7 +433,7 @@ tryButton.addEventListener('click', function(event) {
 
 
 
-startButton.addEventListener("click", function(event) {
+startButton.addEventListener("click", function (event) {
     welcomePage.style.display = "none";
     gamePage.style.display = "block";
 })
@@ -441,18 +441,18 @@ startButton.addEventListener("click", function(event) {
 
 //set up click on jawaban
 for (let i = 0; i < 4; i++) {
-  let pertanyaanBox = document.querySelector(`#jawaban${i}`).parentElement;
-  pertanyaanBox.addEventListener('click', function(event) {
-    //cek jawaban benar -> lanjut;
-    let jawaban = event.target.innerText;
-    let {kunciJawaban} = soal[currentSoal];
-    if (jawaban === kunciJawaban) {
-        
-        correctAnswer(soal);
-    } else {
-        wrongAnswer(soal);
-    }
-  })
+    let pertanyaanBox = document.querySelector(`#jawaban${i}`).parentElement;
+    pertanyaanBox.addEventListener('click', function (event) {
+        //cek jawaban benar -> lanjut;
+        let jawaban = event.target.innerText;
+        let { kunciJawaban } = soal[currentSoal];
+        if (jawaban === kunciJawaban) {
+
+            correctAnswer(soal);
+        } else {
+            wrongAnswer(soal);
+        }
+    })
 }
 
 
