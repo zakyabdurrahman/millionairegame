@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Millionaire";
+    src: url('copperplate.ttf');
+}
+
 html, body {
     background-color: rgb(9, 10, 63);
     margin: 0 auto;
@@ -12,6 +17,7 @@ html, body {
     border-top: 8px solid rgb(3, 14, 116);
     border-radius: 5px;
 }
+
 #game{
     display: none;
     width: 70%;
@@ -80,11 +86,11 @@ html, body {
 }
 .name {
     text-align: center;
-    color: rgb(187, 125, 245);
-    background: linear-gradient(rgb(93, 78, 228) 10%, 
-    rgb(179, 15, 212) 50%,
-    rgb(241, 130, 85));
-    font-family: Algerian;
+    color: white;
+    background: linear-gradient(rgb(93, 78, 228) 10%,
+    rgb(179, 15, 212) 50%, 
+    rgb(241, 130, 85)); 
+    font-family: 'Millionaire';
 }
 .display {
     height: 200px;
@@ -277,12 +283,18 @@ img:hover {
 }
 
 .jawaban-box {
+
     display: inline-block;
     background-color: rgb(9, 10, 63);
     color: white;
     margin: 0px 16px;
     height: 48px;
     width: 150px;
+}
+
+.jawaban-box:hover {
+    background-color: rgb(250, 121, 0);
+    cursor: pointer;
 }
 
 .jawaban {

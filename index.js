@@ -189,8 +189,8 @@ function randomSoal() {
         {
             id: 22,
             pertanyaan: 'Laut terdangkal di dunia adalah ?',
-            jawaban: ['Laut Merah', 'Laut Azov ', 'Laut Banda', 'Laut Aloi'],
-            kunciJawaban: 'Laut Azov ',
+            jawaban: ['Laut Merah', 'Laut Azov', 'Laut Banda', 'Laut Aloi'],
+            kunciJawaban: 'Laut Azov',
             hadiah: 0
         },
 
@@ -289,10 +289,10 @@ function randomSoal() {
    //loop 8 kali
    for (let i = 0; i < 8; i++) {
      //tiap loop angka random 0-16 unik (cek apakah soal duplikat)
-     let random = getRandomInt(0, 16);
+     let random = getRandomInt(0, 32);
      let pertanyaan = bankSoal[random];
      while(soalSudahAda(pertanyaan.id, result)) {
-        random = getRandomInt(0, 15);
+        random = getRandomInt(0, 32);
         pertanyaan = bankSoal[random];
      }
      pertanyaan.hadiah = hadiah[i];
@@ -353,11 +353,13 @@ function correctAnswer(soal) {
     currentSoal++;
     player.rights++;
     console.log(currentPrizeIndex, "INDEX")
-    
+    // menang jackpot
     if (currentPrizeIndex > 7) {
         console.log(player.hadiah);
         player.rights = 8;
         currentPrizeIndex - 1;
+        let music = document.querySelector('#victoryMusic');
+        music.play();
         gameOver();
         return;
     }
@@ -373,6 +375,8 @@ function wrongAnswer() {
       let prize = document.querySelector(`#i${currentPrizeIndex}`);
       prize.classList.remove("current");
     }
+    let jawaban = soal[currentSoal].kunciJawaban;
+    alert(`SALAH!! Jawabannya adalah: ${jawaban}`)
     gameOver();
 }
 
