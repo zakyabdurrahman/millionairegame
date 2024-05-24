@@ -145,6 +145,133 @@ function randomSoal() {
             jawaban: ['Jepang', 'India', 'Nepal', 'Kamboja'],
             kunciJawaban: 'Nepal',
             hadiah: 0
+        },
+        {
+            id: 17,
+            pertanyaan: 'Kota tertua di Indonesia adalah ?',
+            jawaban: ['Palembang', 'Jakarta', 'Manado', 'Aceh'],
+            kunciJawaban: 'Palembang',
+            hadiah: 0
+        },
+
+        {
+            id: 18,
+            pertanyaan: 'Siapakah penemu air raksa ?',
+            jawaban: ['Nicholas', 'Fahrenheit', 'Iznerdj', 'Tom Bersaudara'],
+            kunciJawaban: 'Fahrenheit',
+            hadiah: 0
+        },
+
+        {
+            id: 19,
+            pertanyaan: 'Lithuania adalah negara yang tidak memiliki ?',
+            jawaban: ['Laut', 'Ibu kota', 'Gunung', 'Tentara'],
+            kunciJawaban: 'Gunung',
+            hadiah: 0
+        },
+
+        {
+            id: 20,
+            pertanyaan: 'Presiden wanita pertama di Asia adalah ?',
+            jawaban: ['Sri Devi', 'Liztania', 'Natania Eldra', 'Corazon Aquino'],
+            kunciJawaban: 'Corazon Aquino',
+            hadiah: 0
+        },
+
+        {
+            id: 21,
+            pertanyaan: 'Atithi Devo Bhava adalah budaya penyambutan tamu dari negara ?',
+            jawaban: ['India', 'Nepal', 'Thailand', 'Filipina'],
+            kunciJawaban: 'India',
+            hadiah: 0
+        },
+
+        {
+            id: 22,
+            pertanyaan: 'Laut terdangkal di dunia adalah ?',
+            jawaban: ['Laut Merah', 'Laut Azov ', 'Laut Banda', 'Laut Aloi'],
+            kunciJawaban: 'Laut Azov ',
+            hadiah: 0
+        },
+
+        {
+            id: 23,
+            pertanyaan: 'Penemu cermin adalah ?',
+            jawaban: ['Kaisar Chenghua', 'Jack Stuef', 'Justus von Liebig', 'Anthonio Deman'],
+            kunciJawaban: 'Justus von Liebig',
+            hadiah: 0
+        },
+
+        {
+            id: 24,
+            pertanyaan: 'Driekusman adalah tarian tradisional dari negara ?',
+            jawaban: ['Rusia', 'Jerman', 'Italia', 'Belanda'],
+            kunciJawaban: 'Belanda',
+            hadiah: 0
+        },
+
+        {
+            id: 25,
+            pertanyaan: 'Foil adalah peralatan yang digunakan pada olahraga ?',
+            jawaban: ['Anggar', 'Kasti', 'Capoeira', 'Judo'],
+            kunciJawaban: 'Anggar',
+            hadiah: 0
+        },
+
+        {
+            id: 26,
+            pertanyaan: 'Apa nama bola yang terbuat dari rotan ?',
+            jawaban: ['Bola kriket', 'Bola paraga', 'Bola lacrosse', 'Bola Hoki'],
+            kunciJawaban: 'Bola paraga',
+            hadiah: 0
+        },
+
+        {
+            id: 27,
+            pertanyaan: 'Hum adalah kota kecil di negara ?',
+            jawaban: ['Kanada', 'San Marino', 'Kroasia', 'Tuvalu'],
+            kunciJawaban: 'Kroasia',
+            hadiah: 0
+        },
+
+        {
+            id: 28,
+            pertanyaan: 'Daerah di mana gravitasi menjadi sangat kuat sehingga bahkan cahaya tidak dapat melarikan diri dari efek gravitasi tersebut disebut ?',
+            jawaban: ['Gravitasi Area', 'Ruang Hampa', 'Ruang Waktu', 'Singularitas '],
+            kunciJawaban: 'Singularitas ',
+            hadiah: 0
+        },
+
+        {
+            id: 29,
+            pertanyaan: 'Polimer rantai panjang dari atom yang mengikat satu sama lain disebut ?',
+            jawaban: ['Plastik', 'Karbon', 'Kaca', 'Aluminium'],
+            kunciJawaban: 'Plastik',
+            hadiah: 0
+        },
+
+        {
+            id: 30,
+            pertanyaan: 'Flan adalah salah satu makanan khas dari negara ?',
+            jawaban: ['Portugal', 'Spanyol', 'Jerman', 'Argentina'],
+            kunciJawaban: 'Spanyol',
+            hadiah: 0
+        },
+
+        {
+            id: 31,
+            pertanyaan: 'Sepatu kulit tradisional Korea disebut ?',
+            jawaban: ['Eungjie', 'Byuneo', 'Hwahye', 'Junghie'],
+            kunciJawaban: 'Hwahye',
+            hadiah: 0
+        },
+
+        {
+            id: 32,
+            pertanyaan: 'Penemu neutron adalah ?',
+            jawaban: ['Ernestr Rutherford', 'James Sand', 'Ludwig Planck', 'James Chadwick'],
+            kunciJawaban: 'James Chadwick',
+            hadiah: 0
         }
     ]
     let result =[]
@@ -225,9 +352,14 @@ function correctAnswer(soal) {
     currentPrizeIndex++;
     currentSoal++;
     player.rights++;
+    console.log(currentPrizeIndex, "INDEX")
     
-    if (currentPrizeIndex === 7) {
+    if (currentPrizeIndex > 7) {
+        console.log(player.hadiah);
+        player.rights = 8;
+        currentPrizeIndex - 1;
         gameOver();
+        return;
     }
     updateGame(soal);
     let music =  document.querySelector('#correctMusic')
@@ -245,6 +377,11 @@ function wrongAnswer() {
 }
 
 function gameOver(){
+    for (let i = 0; i < 8; i++) {
+        let prize = document.querySelector(`#i${i}`);
+        prize.classList.remove("current");
+      }
+
     let prizeText = document.querySelector('.prize-text');
     gamePage.style.display = "none";
     gameOverPage.style.display = "flex";
@@ -256,7 +393,6 @@ function gameOver(){
     persen = Math.floor(persen * 100);
 
 
-    console.log(persen);
     let progress = document.querySelector(".progres");
     let progresText = document.querySelector('.progres-value');
     progresText.innerText = `${persen}%`
